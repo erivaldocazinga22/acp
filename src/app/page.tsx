@@ -1,7 +1,13 @@
+import { Footer } from "@/components/layout/footer";
+import { Header } from "@/components/layout/header";
+import { HeroSection } from "@/components/layout/hero";
+
 export default function Home() {
 	return (
-		<main className="h-screen flex items-center justify-center">
-			<div>Hello world!</div>
+		<main className="font-default">
+			<Header />
+			<HeroSection />
+			<Footer />
 		</main>
 	);
 }
