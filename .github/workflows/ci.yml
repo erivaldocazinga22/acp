@@ -21,10 +21,6 @@ jobs:
         node-version: '18'
 
     - name: Instalar dependências
-      run: npm install
-
-    - name: Lint
-      run: npm run lint
-
+      run: pnpm install --frozen-lockfile
     - name: Build
-      run: npm run build
+      run: pnpm run build
