@@ -22,7 +22,5 @@ jobs:
       run: npm install -g pnpm
     - name: Instalar dependências
       run: pnpm install --frozen-lockfile
-    - name: Rodar Biome Check
-      run: pnpm run biome:check
     - name: Build
       run: pnpm run build

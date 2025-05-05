@@ -1,6 +1,6 @@
-import { ThemeToggle } from "./theme-toggle";
 import { BookCheck } from "lucide-react";
 import Link from "next/link";
+import { ThemeToggle } from "./theme-toggle";
 
 export const Header = async () => {
 	return (
