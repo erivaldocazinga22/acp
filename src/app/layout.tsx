@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
 	title: "Portal Acadêmico",
@@ -13,9 +14,9 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="pt">
+		<html lang="pt" className="dark" suppressHydrationWarning>
 			<body className="relative min-h-dvh bg-background text-foreground antialiased">
-				{children}
+				<ThemeProvider attribute="class">{children}</ThemeProvider>
 			</body>
 		</html>
 	);
