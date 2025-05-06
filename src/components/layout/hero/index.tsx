@@ -41,11 +41,11 @@ export const HeroSection = () => {
 	const router = useRouter();
 
 	const navigateToGetStarted = useCallback(
-		() => router.push("/register"),
+		() => router.push("/auth/register"),
 		[router],
 	);
 	const navigateToSignIn = useCallback(
-		() => router.push("/sign-in"),
+		() => router.push("/auth/sign-in"),
 		[router],
 	);
 
