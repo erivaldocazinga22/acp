@@ -9,6 +9,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: academic-portal
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
     - name: Clonar o repositório
       uses: actions/checkout@v3
@@ -22,5 +36,9 @@ jobs:
       run: npm install -g pnpm
     - name: Instalar dependências
       run: pnpm install --frozen-lockfile
+    - name: Rodar Migrations
+      env:
+        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/academic-portal
+      run: pnpm run migrate
     - name: Build
       run: pnpm run build
