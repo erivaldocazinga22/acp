@@ -17,7 +17,7 @@ export default function SignIn() {
 			<p className="mt-8 text-center text-sm dark:text-neutral-500">
 				Não tem uma conta?{" "}
 				<Link
-					href="/register"
+					href="/auth/register"
 					className="font-medium text-blue-600 hover:text-blue-500"
 				>
 					Cadastre-se

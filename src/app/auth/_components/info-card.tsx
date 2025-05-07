@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 export const InfoCard = () => {
 	const pathname = usePathname();
-	const isSignIn = pathname === "/sign-in";
+	const isSignIn = pathname === "/auth/sign-in";
 
 	const title = isSignIn
 		? "Portal Acadêmico"

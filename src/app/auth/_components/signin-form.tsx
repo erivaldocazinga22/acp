@@ -39,7 +39,7 @@ export const SignInForm = () => {
 
 			if (result?.ok) {
 				toast.success("Login bem-sucedido.");
-				router.push("/painel");
+				router.push("/dashboard");
 			} else {
 				toast.error("Email ou senha inválidos.");
 			}

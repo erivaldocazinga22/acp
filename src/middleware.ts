@@ -41,5 +41,5 @@ export default withAuth(middleware, callbackOptions);
 // };
 
 export const config = {
-	matcher: "/painel",
+	matcher: ["/dashbord", "/test"],
 };
