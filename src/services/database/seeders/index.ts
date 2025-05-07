@@ -6,9 +6,7 @@ async function seedDatabase() {
 	console.log("🌱 Iniciando seed do banco de dados...");
 	const usersExists = await prisma.user.findMany();
 	if (usersExists.length > 0) {
-		console.log(
-			"❌ Usuários já existem no banco de dados. Abortando seed.",
-		);
+		console.log("❌ Usuários já existem no banco de dados. Abortando seed");
 		return;
 	}
 
