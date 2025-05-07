@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "next-themes";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
 	title: "Portal Acadêmico",
@@ -19,6 +20,7 @@ export default function RootLayout({
 			<body className="relative min-h-dvh bg-background text-foreground antialiased">
 				<ThemeProvider attribute="class">{children}</ThemeProvider>
 				<Analytics />
+				<Toaster />
 			</body>
 		</html>
 	);

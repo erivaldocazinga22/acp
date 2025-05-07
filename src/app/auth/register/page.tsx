@@ -1,8 +1,12 @@
-export default function RegisterPage() {
+import { RegisterForm } from "../_components/register-form";
+
+export default function Register() {
 	return (
-		<div>
-			<h1 className="text-3xl font-bold underline">Register</h1>
-			<p>Essa é a página de registro.</p>
-		</div>
+		<main className="w-full max-w-md mx-auto">
+			<h2 className="text-3xl font-bold mb-2 text-center">
+				Criar nova conta
+			</h2>
+			<RegisterForm />
+		</main>
 	);
 }
