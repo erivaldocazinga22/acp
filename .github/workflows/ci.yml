@@ -37,6 +37,15 @@ jobs:
       - name: Instalar pnpm
         run: npm install -g pnpm
 
+      # Cache de dependências do pnpm
+      - name: Cache do pnpm
+        uses: actions/cache@v3
+        with:
+          path: ~/.next/cache
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
       - name: Instalar dependências
         run: pnpm install --frozen-lockfile
 
