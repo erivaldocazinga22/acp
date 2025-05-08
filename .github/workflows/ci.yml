@@ -2,13 +2,14 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     services:
       postgres:
         image: postgres:15
@@ -23,22 +24,30 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-    steps:
-    - name: Clonar o repositório
-      uses: actions/checkout@v3
 
-    - name: Usar Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-    
-    - name: Instalar pnpm
-      run: npm install -g pnpm
-    - name: Instalar dependências
-      run: pnpm install --frozen-lockfile
-    - name: Rodar Migrations
-      env:
-        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/academic-portal
-      run: pnpm run migrate
-    - name: Build
-      run: pnpm run build
+    steps:
+      - name: Clonar o repositório
+        uses: actions/checkout@v3
+
+      - name: Usar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Instalar pnpm
+        run: npm install -g pnpm
+
+      - name: Instalar dependências
+        run: pnpm install --frozen-lockfile
+
+      - name: Rodar Migrations
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/academic-portal
+        run: pnpm run migrate
+
+      - name: Build da aplicação
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/academic-portal
+          NEXTAUTH_SECRET: super-secret-test
+          NEXTAUTH_URL: http://localhost:3000
+        run: pnpm run build

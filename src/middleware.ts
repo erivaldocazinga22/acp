@@ -3,36 +3,25 @@ import {
 	type NextRequestWithAuth,
 	withAuth,
 } from "next-auth/middleware";
-import { NextResponse, userAgent } from "next/server";
+import { NextResponse } from "next/server";
 
 function middleware(request: NextRequestWithAuth) {
-	const url = request.nextUrl;
+	const { pathname } = request.nextUrl;
 
 	const isPrivatRoutes = request.nextUrl.pathname.startsWith("/painel");
 	const isAdminUser = request.nextauth.token?.role === "ADMIN";
+
 	if (isPrivatRoutes && !isAdminUser) {
 		return NextResponse.rewrite(new URL("/sign-in", request.url));
 	}
 
-	return NextResponse.rewrite(url);
+	return NextResponse.next();
 }
 
 const callbackOptions: NextAuthMiddlewareOptions = {};
+
 export default withAuth(middleware, callbackOptions);
 
-// export const config = {
-// 	matcher: [
-// 		/*
-// 		 * Match all request paths except for the ones starting with:
-// 		 * - api (API routes)
-// 		 * - _next/static (static files)
-// 		 * - _next/image (image optimization files)
-// 		 * - favicon.ico, sitemap.xml, robots.txt (metadata files)
-// 		 */
-// 		"/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
-// 	],
-// };
-
 export const config = {
-	matcher: "/dashboard",
+	matcher: ["/dashboard", "/dashboard/:path*"],
 };
