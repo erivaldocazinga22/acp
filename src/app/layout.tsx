@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { NextAuthWapper } from "@/providers/next-auth-wapper";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
@@ -18,9 +19,13 @@ export default function RootLayout({
 	return (
 		<html lang="pt" className="dark" suppressHydrationWarning>
 			<body className="relative min-h-dvh bg-background text-foreground antialiased">
-				<ThemeProvider attribute="class">{children}</ThemeProvider>
+				<NextAuthWapper>
+					<ThemeProvider attribute="class">
+						{children}
+						<Toaster />
+					</ThemeProvider>
+				</NextAuthWapper>
 				<Analytics />
-				<Toaster />
 			</body>
 		</html>
 	);

@@ -8,30 +8,30 @@ export const Footer = async () => {
 				<p className="text-sm text-muted-foreground">
 					&copy; {new Date().getFullYear()} 💙
 					<Link
-						href="https://github.com/erivaldocazinga22"
+						href="https://eclipse-solutions.vercel.app/"
 						className="font-semibold dark:text-blue-200 hover:text-blue-600"
 					>
-						Erivaldo Caginga
+						Eclise.Solutions.ao
 					</Link>
 					. All rights reserved.
 				</p>
 				<nav className="flex gap-4 items-center sm:gap-6">
 					<Link
-						href="#"
+						href="/legal/terms"
 						className="text-sm font-medium hover:underline underline-offset-4"
 					>
 						Termos
 					</Link>
 					<Separator orientation="vertical" className="min-h-4" />
 					<Link
-						href="#"
+						href="/legal/privacy"
 						className="text-sm font-medium hover:underline underline-offset-4"
 					>
 						Politicas
 					</Link>
 					<Separator orientation="vertical" className="min-h-4" />
 					<Link
-						href="/help"
+						href="/legal/help"
 						className="text-sm font-medium hover:underline underline-offset-4"
 					>
 						Ajudas

@@ -32,7 +32,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
 				<div className="hidden lg:block relative w-0 flex-1">
 					<Image
 						className="absolute inset-0 h-full w-full object-cover"
-						src="/placeholder.svg"
+						src="/images/sign-in-background.jpg"
 						alt="Portal Acadêmico"
 						width={1920}
 						height={1080}

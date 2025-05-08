@@ -43,7 +43,8 @@ export async function POST(request: NextRequest) {
 	return NextResponse.json(
 		{
 			ok: true,
-			data,
+			message: "Login bem-sucedido.",
+			data: user,
 		},
 		{
 			status: 200,

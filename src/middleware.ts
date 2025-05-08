@@ -6,14 +6,7 @@ import {
 import { NextResponse, userAgent } from "next/server";
 
 function middleware(request: NextRequestWithAuth) {
-	console.log("Middleware rodando...");
 	const url = request.nextUrl;
-
-	const { device } = userAgent(request);
-	const viewport = device.type === "mobile" ? "mobile" : "desktop";
-	url.searchParams.set("viewport", viewport);
-
-	console.log({ viewport, device });
 
 	const isPrivatRoutes = request.nextUrl.pathname.startsWith("/painel");
 	const isAdminUser = request.nextauth.token?.role === "ADMIN";
@@ -41,5 +34,5 @@ export default withAuth(middleware, callbackOptions);
 // };
 
 export const config = {
-	matcher: ["/dashbord", "/test"],
+	matcher: "/dashboard",
 };

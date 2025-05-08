@@ -1,14 +1,13 @@
-import { prisma } from "@/services/database/prisma.client";
+import { env } from "@/lib/env.config";
 import type { User } from "@prisma/client";
-import bcrypt from "bcryptjs";
 import type { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 const authOptions: NextAuthOptions = {
 	pages: {
-		signIn: "/auth/login",
-		signOut: "/auth/login",
+		signIn: "/auth/sign-in",
+		signOut: "/auth/sign-in",
 	},
 	providers: [
 		CredentialsProvider({
@@ -18,25 +17,27 @@ const authOptions: NextAuthOptions = {
 				password: { label: "Password", type: "password" },
 			},
 			async authorize(credentials) {
-				const user = await prisma.user.findUnique({
-					where: {
-						email: credentials?.email as string,
+				if (!credentials) return null;
+				if (!credentials.email || !credentials.password) return null;
+
+				const response = await fetch(
+					`${env.NEXTAUTH_URL}/api/auth/sign-in`,
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({
+							email: credentials?.email,
+							password: credentials?.password,
+						}),
 					},
-				});
-
-				if (!user) {
-					throw new Error("Email ou senha incorretos");
-				}
-
-				const isValidEmail = user.email === credentials?.email;
-				const isValidPassword = bcrypt.compare(
-					credentials?.password as string,
-					user.password,
 				);
 
-				if (!isValidEmail || !isValidPassword) return null;
+				const res = await response.json();
+				if (!response.ok) return null;
 
-				return user;
+				return res.data;
 			},
 		}),
 	],
