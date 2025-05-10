@@ -31,7 +31,7 @@ export const MaterialSearch = () => {
 			</div>
 			<Button
 				type="submit"
-				className="absolute right-1 top-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white"
+				className="absolute rounded-sm right-1 top-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white"
 			>
 				Pesquisar
 			</Button>

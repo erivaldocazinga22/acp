@@ -11,14 +11,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { type SignInSchemaValues, signInSchema } from "@/types/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Lock, Mail } from "lucide-react";
+import { Eye, EyeClosed, Lock, Mail } from "lucide-react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 export const SignInForm = () => {
+	const [viewPassword, setViewPassword] = useState(false);
 	const router = useRouter();
 	const form = useForm<SignInSchemaValues>({
 		mode: "all",
@@ -101,10 +103,25 @@ export const SignInForm = () => {
 									</div>
 									<Input
 										{...field}
-										type="password"
+										type={
+											viewPassword ? "text" : "password"
+										}
 										placeholder="••••••••"
-										className="pl-10 border-neutral-300 focus:ring-blue-600 focus:border-blue-600"
+										className="pl-10 pr-10 z-0 border-neutral-300 focus:ring-blue-600 focus:border-blue-600"
 									/>
+									<button
+										type="button"
+										onClick={() =>
+											setViewPassword((prev) => !prev)
+										}
+										className="absolute inset-y-0 right-0 pr-3 flex items-center z-10"
+									>
+										{viewPassword ? (
+											<Eye className="h-5 w-5 text-neutral-500" />
+										) : (
+											<EyeClosed className="h-5 w-5 text-neutral-500" />
+										)}
+									</button>
 								</div>
 							</FormControl>
 							<FormMessage />

@@ -11,9 +11,9 @@ export const Footer = async () => {
 						href="https://eclipse-solutions.vercel.app/"
 						className="font-semibold dark:text-blue-200 hover:text-blue-600"
 					>
-						Eclise.Solutions.ao
+						Eclipse Solutions
 					</Link>
-					. All rights reserved.
+					. Todos os direitos reservados.
 				</p>
 				<nav className="flex gap-4 items-center sm:gap-6">
 					<Link

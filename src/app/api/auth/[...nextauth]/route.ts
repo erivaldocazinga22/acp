@@ -1,13 +1,18 @@
 import { env } from "@/lib/env.config";
+import { prisma } from "@/services/database/prisma.client";
 import type { User } from "@prisma/client";
+import bcrypt from "bcryptjs";
 import type { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 const authOptions: NextAuthOptions = {
+	debug: true,
 	pages: {
 		signIn: "/auth/sign-in",
 		signOut: "/auth/sign-in",
+		error: "/auth/sign-in",
+		newUser: "/auth/sign-in",
 	},
 	providers: [
 		CredentialsProvider({
@@ -20,24 +25,29 @@ const authOptions: NextAuthOptions = {
 				if (!credentials) return null;
 				if (!credentials.email || !credentials.password) return null;
 
-				const response = await fetch(
-					`${env.NEXTAUTH_URL}/api/auth/sign-in`,
-					{
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: JSON.stringify({
-							email: credentials?.email,
-							password: credentials?.password,
-						}),
+				const user = await prisma.user.findUnique({
+					where: {
+						email: credentials.email,
 					},
+				});
+
+				if (!user) return null;
+
+				const isValidEmail = user.email === credentials.email;
+				const isValidPassword = await bcrypt.compare(
+					credentials.password as string,
+					user.password,
 				);
 
-				const res = await response.json();
-				if (!response.ok) return null;
+				if (!isValidEmail || !isValidPassword) return null;
 
-				return res.data;
+				return {
+					id: user.id,
+					email: user.email,
+					name: user.name,
+					role: user.role,
+					image: user.image,
+				};
 			},
 		}),
 	],
