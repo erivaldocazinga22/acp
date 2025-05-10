@@ -26,12 +26,12 @@ export const NotificationToggle = () => {
 						Mostrar todas como lidas
 					</button>
 				</div>
-				{Array.from({ length: 4 }).map((_, index) => (
+				{/* {Array.from({ length: 4 }).map((_, index) => (
 					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 					<div key={index} className="h-12">
 						Notificação {index + 1}
 					</div>
-				))}
+				))} */}
 			</PopoverContent>
 		</Popover>
 	);

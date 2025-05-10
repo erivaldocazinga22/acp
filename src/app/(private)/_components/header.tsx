@@ -25,7 +25,7 @@ export function Header() {
 	return (
 		<header className="border-b border-dashed">
 			<div className="container mx-auto h-16 flex items-center justify-between">
-				<LogoApp href={isDashboard ? pathname : "/painel"} />
+				<LogoApp href={pathname ?? "/dashboard"} />
 				<div className="flex items-center gap-4 ml-auto">
 					{!isDashboard && <NotificationToggle />}
 					<ThemeToggle />
