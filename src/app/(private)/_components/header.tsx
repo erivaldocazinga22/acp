@@ -4,6 +4,7 @@ import { LogoApp } from "@/components/layout/logo-app";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { usePathname } from "next/navigation";
 import { v4 as uuidV4 } from "uuid";
+import { NotificationToggle } from "./notification-toggle";
 
 const NAV_USER = [
 	{
@@ -24,13 +25,9 @@ export function Header() {
 	return (
 		<header className="border-b border-dashed">
 			<div className="container mx-auto h-16 flex items-center justify-between">
-				{isDashboard ? (
-					<h1 className="text-2xl font-semibold">Dashboard</h1>
-				) : (
-					<LogoApp href="/painel" />
-				)}
+				<LogoApp href={isDashboard ? pathname : "/painel"} />
 				<div className="flex items-center gap-4 ml-auto">
-					{/* <NotificationToggle /> */}
+					{!isDashboard && <NotificationToggle />}
 					<ThemeToggle />
 					<AvatarDropdown items={NAV_USER} />
 				</div>

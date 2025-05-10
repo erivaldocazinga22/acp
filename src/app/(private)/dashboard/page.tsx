@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { MaterialFilters } from "./_components/material-filters";
+import { MaterialResults } from "./_components/material-results";
+import { MaterialSearch } from "./_components/material-search";
 
 export const metadata: Metadata = {
 	title: "Dashboard - Portal Academico",
@@ -17,10 +20,14 @@ export default async function DashboardPage() {
 					resoluções para seus estudos
 				</p>
 			</div>
-			{/* <MaterialSearch /> */}
+			<MaterialSearch />
 			<div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-4">
-				<div className="md:col-span-1">{/* <MaterialFilters /> */}</div>
-				<div className="md:col-span-3">{/* <MaterialResults /> */}</div>
+				<div className="md:col-span-1">
+					<MaterialFilters />
+				</div>
+				<div className="md:col-span-3">
+					<MaterialResults />
+				</div>
 			</div>
 		</main>
 	);

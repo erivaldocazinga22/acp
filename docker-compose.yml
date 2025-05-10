@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  app:
+    image: bitnami/postgresql:latest
+    ports:
+      - 5432:5432
+    volumes:
+      -  ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=bcbc
+      - POSTGRES_USER=root
+      - POSTGRES_DB=academic-portal-db

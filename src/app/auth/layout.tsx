@@ -37,6 +37,8 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
 						width={1920}
 						height={1080}
 						priority
+						placeholder="blur"
+						blurDataURL="/images/sign-in-background.jpg"
 					/>
 					<div className="absolute inset-0 bg-blue-600 mix-blend-multiply opacity-20" />
 					<div className="absolute inset-0 flex flex-col justify-end p-12">
